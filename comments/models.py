@@ -10,3 +10,9 @@ class Comment(models.Model):
     shop = models.ForeignKey('shops.Shop', default=1, related_name='comment_shop')
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return str(self.user.username)
+
+    def __str__(self):
+        return str(self.user.username)
