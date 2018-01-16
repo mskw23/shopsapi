@@ -12,6 +12,6 @@ class Theme(models.Model):
     description = models.CharField(max_length=100, blank=False)
     font = models.CharField(max_length=100, blank=False)
     color = models.CharField(max_length=10, blank=False)
-    image = models.ImageField(db_column='MyPhoto', upload_to=image_upload, blank=True, null=True)
+    #image = models.ImageField(db_column='MyPhoto', upload_to=image_upload, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now_add=True)

@@ -8,11 +8,11 @@ from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Shop(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE())
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
     title = models.CharField(max_length=20, blank=False)
     slug = models.SlugField(unique=True)
     description = models.CharField(max_length=100, blank=False)
-    theme = models.ForeignKey('Theme', default=1, related_name='theme')
+    theme = models.ForeignKey('themes.Theme', default=1, related_name='theme')
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now_add=True)
 
@@ -27,9 +27,9 @@ class Shop(models.Model):
 
     def get_api_url(self):
         return reverse("posts-api:detail", kwargs={"slug": self.slug})
-
-    class Meta:
-        ordering = ["-timestamp", "-updated"]
+    #
+    # class Meta:
+        # ordering = ["-timestamp", "-updated"]
 
     def create_slug(instance, new_slug=None):
         slug = slugify(instance.title)
