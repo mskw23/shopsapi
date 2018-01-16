@@ -22,7 +22,7 @@ class ShopDetailSerializer(ModelSerializer):
             'description'
         ]
 
-class ShopCreateSerializer(ModelSerializer):
+class ShopCreateUpdateSerializer(ModelSerializer):
     class Meta:
         model = Shop
         fields = [

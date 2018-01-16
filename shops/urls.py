@@ -5,7 +5,8 @@ from views import (
     ShopListAPIView,
     ShopDetailAPIView,
     ShopUpdateAPIView,
-    ShopDestroyAPIView
+    ShopDestroyAPIView,
+    ShopCreateAPIView
     )
 
 urlpatterns = [
@@ -13,5 +14,6 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/$', ShopDetailAPIView.as_view(), name='detail'),
     url(r'^(?P<slug>[\w-]+)/edit/$', ShopUpdateAPIView.as_view(), name='update'),
     url(r'^(?P<slug>[\w-]+)/delete/$', ShopDestroyAPIView.as_view(), name='destroy'),
+    url(r'^create/$', ShopCreateAPIView.as_view(), name='create'),
 
 ]
