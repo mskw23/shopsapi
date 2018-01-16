@@ -25,15 +25,6 @@ class Shop(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse("posts:detail", kwargs={"slug": self.slug})
-
-    def get_api_url(self):
-        return reverse("posts-api:detail", kwargs={"slug": self.slug})
-    #
-    # class Meta:
-        # ordering = ["-timestamp", "-updated"]
-
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
     if new_slug is not None:

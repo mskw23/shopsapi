@@ -3,6 +3,11 @@ from __future__ import unicode_literals
 
 from django.db.models import Q
 
+from rest_framework.pagination import (
+    LimitOffsetPagination,
+    PageNumberPagination
+)
+
 from rest_framework.filters import (
         SearchFilter,
         OrderingFilter,
@@ -26,6 +31,7 @@ IsAuthenticatedOrReadOnly,
 )
 
 from .permissions import isOwnerOrReadOnly
+from .pagination import ShopLimitOffsetPagination, ShopPageNumberPagination
 
 from shops.models import Shop
 from .serializers import ShopListSerializer, ShopDetailSerializer, ShopCreateUpdateSerializer
@@ -37,6 +43,8 @@ class ShopListAPIView(ListAPIView):
 
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['title']
+
+    pagination_class = ShopPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
         # queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)

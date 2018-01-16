@@ -5,9 +5,9 @@ from rest_framework.pagination import (
 
 
 class ShopLimitOffsetPagination(LimitOffsetPagination):
-    default_limit = 10
-    max_limit = 10
+    default_limit = 6
+    max_limit = 6
 
 
 class ShopPageNumberPagination(PageNumberPagination):
-    page_size = 20
+    page_size = 6
