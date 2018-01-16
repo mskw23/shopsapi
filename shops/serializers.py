@@ -6,6 +6,7 @@ class ShopListSerializer(ModelSerializer):
     class Meta:
         model = Shop
         fields = [
+            'id',
             'title',
             'slug',
             'description'
@@ -15,7 +16,16 @@ class ShopDetailSerializer(ModelSerializer):
     class Meta:
         model = Shop
         fields = [
+            'id',
             'title',
             'slug',
+            'description'
+        ]
+
+class ShopCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Shop
+        fields = [
+            'title',
             'description'
         ]

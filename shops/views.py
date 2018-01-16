@@ -2,7 +2,12 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import (
+    ListAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+    DestroyAPIView
+)
 from shops.models import Shop
 from .serializers import ShopListSerializer, ShopDetailSerializer
 # Create your views here.
@@ -12,6 +17,16 @@ class ShopListAPIView(ListAPIView):
     serializer_class = ShopListSerializer
 
 class ShopDetailAPIView(RetrieveAPIView):
+    queryset = Shop.objects.all()
+    serializer_class = ShopDetailSerializer
+    lookup_field = 'slug'
+
+class ShopUpdateAPIView(UpdateAPIView):
+    queryset = Shop.objects.all()
+    serializer_class = ShopDetailSerializer
+    lookup_field = 'slug'
+
+class ShopDestroyAPIView(DestroyAPIView):
     queryset = Shop.objects.all()
     serializer_class = ShopDetailSerializer
     lookup_field = 'slug'
