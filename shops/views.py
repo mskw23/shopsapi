@@ -79,7 +79,7 @@ class ShopDestroyAPIView(DestroyAPIView):
 
 class ShopCreateAPIView(CreateAPIView):
     queryset = Shop.objects.all()
-
+    permission_classes = [AllowAny]
     serializer_class = ShopCreateUpdateSerializer
 
     def perform_create(self, serializer):

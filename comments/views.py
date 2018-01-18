@@ -39,50 +39,35 @@ from comments.models import Comment
 from .serializers import CommentSerializer
 # Create your views here.
 
-class ShopListAPIView(ListAPIView):
-    serializer_class = ShopListSerializer
+
+class CommentListAPIView(ListAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
     permission_classes = [AllowAny]
-
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['title']
-
     pagination_class = ShopPageNumberPagination
 
-    def get_queryset(self, *args, **kwargs):
-        # queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)
-        queryset_list = Shop.objects.all()  # filter(user=self.request.user)
-        query = self.request.GET.get("q")
-        if query:
-            queryset_list = queryset_list.filter(
-                Q(title__icontains=query)
-            ).distinct()
-        return queryset_list
 
-class ShopDetailAPIView(RetrieveAPIView):
-    queryset = Shop.objects.all()
-    serializer_class = ShopDetailSerializer
-    lookup_field = 'slug'
-    permission_classes = [AllowAny]
-
-class ShopUpdateAPIView(RetrieveUpdateAPIView):
-    queryset = Shop.objects.all()
-    serializer_class = ShopCreateUpdateSerializer
+class CommentUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
 
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
-class ShopDestroyAPIView(DestroyAPIView):
-    queryset = Shop.objects.all()
-    serializer_class = ShopDetailSerializer
+
+class CommentDestroyAPIView(DestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticated, isOwnerOrReadOnly]
 
-class ShopCreateAPIView(CreateAPIView):
-    queryset = Shop.objects.all()
 
-    serializer_class = ShopCreateUpdateSerializer
+class CommentCreateAPIView(CreateAPIView):
+    queryset = Comment.objects.all()
+    permission_classes = [IsAuthenticated]
+    serializer_class = CommentSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

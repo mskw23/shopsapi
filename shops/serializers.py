@@ -2,6 +2,9 @@ from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
 
 from shops.models import Shop
 
+from comments.serializers import CommentSerializer
+from comments.models import Comment
+
 
 class ShopListSerializer(ModelSerializer):
     url = HyperlinkedIdentityField(
@@ -27,6 +30,9 @@ class ShopDetailSerializer(ModelSerializer):
     )
     user = SerializerMethodField()
     image = SerializerMethodField()
+    comments = SerializerMethodField()
+    products = SerializerMethodField()
+
     class Meta:
         model = Shop
         fields = [
@@ -47,11 +53,15 @@ class ShopDetailSerializer(ModelSerializer):
             image = None
         return image
 
+    def get_comments(self, obj):
+        content_type = obj.get_content_type
+        comments = Comment.objects.fi
+
 
 class ShopCreateUpdateSerializer(ModelSerializer):
     class Meta:
         model = Shop
         fields = [
             'title',
-            'description'
+            'description',
         ]

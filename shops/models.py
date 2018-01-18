@@ -5,7 +5,11 @@ from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
 from django.db.models.signals import pre_save
+
+from comments.models import Comment
+from products.models import Product
 
 from .utils import get_read_time
 
@@ -24,6 +28,13 @@ class Shop(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type
+
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)
