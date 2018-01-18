@@ -5,7 +5,9 @@ from django.db import models
 
 def upload_location(instance, filename):
     PostModel = instance.__class__
-    new_id = PostModel.objects.order_by("id").last().id + 1
+    new_id = 0
+    if PostModel.objects.order_by("id").last() != None:
+        new_id = PostModel.objects.order_by("id").last().id + 1
     return "product/%s/%s" %(new_id, filename)
 
 # Create your models here.

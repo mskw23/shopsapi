@@ -27,7 +27,8 @@ class ProductCreateSerializer(ModelSerializer):
         fields = [
             'title',
             'description',
-            'shop'
+            'shop',
+            'image'
         ]
 
 class ProductUpdateSerializer(ModelSerializer):

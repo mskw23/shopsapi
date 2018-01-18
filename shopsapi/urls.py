@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^api/users/', include("accounts.urls", namespace='users-api')),
     url(r'^api/shops/', include("shops.urls", namespace='shops-api')),
     url(r'^api/comments/', include("comments.urls", namespace='comments-api')),
+    url(r'^api/products/', include("products.urls", namespace='products-api')),
     url(r'^api/auth/token', obtain_jwt_token)
 ]
 
