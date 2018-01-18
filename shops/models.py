@@ -16,7 +16,7 @@ from .utils import get_read_time
 def upload_location(instance, filename):
     PostModel = instance.__class__
     new_id = PostModel.objects.order_by("id").last().id + 1
-    return "%s/%s" %(new_id, filename)
+    return "shop/%s/%s" %(new_id, filename)
 
 # Create your models here.
 class Shop(models.Model):

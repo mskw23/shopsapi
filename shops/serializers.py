@@ -5,6 +5,9 @@ from shops.models import Shop
 from comments.serializers import CommentSerializer
 from comments.models import Comment
 
+from products.serializers import ProductSerializer
+from products.models import Product
+
 
 class ShopListSerializer(ModelSerializer):
     url = HyperlinkedIdentityField(
@@ -36,7 +39,7 @@ class ShopDetailSerializer(ModelSerializer):
     user = SerializerMethodField()
     image = SerializerMethodField()
     comments = SerializerMethodField()
-    #products = SerializerMethodField()
+    products = SerializerMethodField()
 
     class Meta:
         model = Shop
@@ -48,7 +51,8 @@ class ShopDetailSerializer(ModelSerializer):
             'description',
             'image',
             'url',
-            'comments'
+            'comments',
+            'products'
         ]
 
     def get_user(self, obj):
@@ -63,10 +67,13 @@ class ShopDetailSerializer(ModelSerializer):
 
     def get_comments(self, obj):
         qs = Comment.objects.filter(shop=obj.id)
-        print qs
         comments = CommentSerializer(qs, many=True).data
-        print comments
         return comments
+
+    def get_products(self, obj):
+        qs = Product.objects.filter(shop=obj.id)
+        products = ProductSerializer(qs, many=True).data
+        return products
 
 
 class ShopCreateUpdateSerializer(ModelSerializer):
