@@ -26,9 +26,7 @@ class Shop(models.Model):
     description = models.CharField(max_length=100, blank=False)
     image = models.ImageField(upload_to=upload_location,
                               null=True,
-                              blank=True,
-                              width_field="width_field",
-                              height_field="height_field")
+                              blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now_add=True)
 

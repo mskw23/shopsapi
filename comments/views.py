@@ -50,7 +50,6 @@ class CommentListAPIView(ListAPIView):
 class CommentUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentUpdateSerializer
-    lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
 
     def perform_update(self, serializer):
