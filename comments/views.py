@@ -36,7 +36,7 @@ from shops.permissions import isOwnerOrReadOnly
 from shops.pagination import ShopLimitOffsetPagination, ShopPageNumberPagination
 
 from comments.models import Comment
-from .serializers import CommentSerializer
+from .serializers import CommentSerializer, CommentCreateSerializer, CommentUpdateSerializer
 # Create your views here.
 
 
@@ -49,7 +49,7 @@ class CommentListAPIView(ListAPIView):
 
 class CommentUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    serializer_class = CommentUpdateSerializer
     lookup_field = 'slug'
     permission_classes = [IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
 
@@ -60,14 +60,13 @@ class CommentUpdateAPIView(RetrieveUpdateAPIView):
 class CommentDestroyAPIView(DestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    lookup_field = 'slug'
     permission_classes = [IsAuthenticated, isOwnerOrReadOnly]
 
 
 class CommentCreateAPIView(CreateAPIView):
     queryset = Comment.objects.all()
     permission_classes = [IsAuthenticated]
-    serializer_class = CommentSerializer
+    serializer_class = CommentCreateSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

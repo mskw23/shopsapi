@@ -10,3 +10,20 @@ class CommentSerializer(ModelSerializer):
             'title',
             'message',
         ]
+
+class CommentCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = [
+            'title',
+            'message',
+            'shop'
+        ]
+
+class CommentUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = [
+            'title',
+            'message'
+        ]
