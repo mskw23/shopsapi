@@ -9,6 +9,7 @@ class CommentSerializer(ModelSerializer):
             'id',
             'title',
             'message',
+            'user'
         ]
 
 class CommentCreateSerializer(ModelSerializer):

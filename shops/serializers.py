@@ -35,7 +35,7 @@ class ShopDetailSerializer(ModelSerializer):
     )
     user = SerializerMethodField()
     image = SerializerMethodField()
-    #comments = SerializerMethodField()
+    comments = SerializerMethodField()
     #products = SerializerMethodField()
 
     class Meta:
@@ -48,6 +48,7 @@ class ShopDetailSerializer(ModelSerializer):
             'description',
             'image',
             'url',
+            'comments'
         ]
 
     def get_user(self, obj):
@@ -61,8 +62,10 @@ class ShopDetailSerializer(ModelSerializer):
         return image
 
     def get_comments(self, obj):
-        qs = Comment.objects.filter_by_instance(obj)
+        qs = Comment.objects.filter(shop=obj.id)
+        print qs
         comments = CommentSerializer(qs, many=True).data
+        print comments
         return comments
 
 
