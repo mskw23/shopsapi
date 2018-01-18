@@ -8,30 +8,35 @@ from comments.models import Comment
 
 class ShopListSerializer(ModelSerializer):
     url = HyperlinkedIdentityField(
-        view_name='shops_api:detail',
+        view_name='shops-api:detail',
         lookup_field='slug'
     )
-
+    image = SerializerMethodField()
     class Meta:
         model = Shop
         fields = [
-            'id',
-            'url',
             'title',
-            'slug',
-            'description'
+            'image',
+            'url'
         ]
+
+    def get_image(self, obj):
+        try:
+            image = obj.image.url
+        except:
+            image = None
+        return image
 
 
 class ShopDetailSerializer(ModelSerializer):
     url = HyperlinkedIdentityField(
-        view_name='shops_api:detail',
+        view_name='shops-api:detail',
         lookup_field='slug'
     )
     user = SerializerMethodField()
     image = SerializerMethodField()
-    comments = SerializerMethodField()
-    products = SerializerMethodField()
+    #comments = SerializerMethodField()
+    #products = SerializerMethodField()
 
     class Meta:
         model = Shop
@@ -40,7 +45,9 @@ class ShopDetailSerializer(ModelSerializer):
             'user',
             'title',
             'slug',
-            'description'
+            'description',
+            'image',
+            'url',
         ]
 
     def get_user(self, obj):
@@ -54,8 +61,9 @@ class ShopDetailSerializer(ModelSerializer):
         return image
 
     def get_comments(self, obj):
-        content_type = obj.get_content_type
-        comments = Comment.objects.fi
+        qs = Comment.objects.filter_by_instance(obj)
+        comments = CommentSerializer(qs, many=True).data
+        return comments
 
 
 class ShopCreateUpdateSerializer(ModelSerializer):
@@ -64,4 +72,5 @@ class ShopCreateUpdateSerializer(ModelSerializer):
         fields = [
             'title',
             'description',
+            'image'
         ]
