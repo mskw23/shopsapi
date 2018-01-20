@@ -12,7 +12,9 @@ class ProductSerializer(ModelSerializer):
             'title',
             'description',
             'shop',
-            'image'
+            'image',
+            'quantity',
+            'price'
         ]
 
     def get_image(self, obj):
@@ -29,7 +31,9 @@ class ProductCreateSerializer(ModelSerializer):
             'title',
             'description',
             'shop',
-            'image'
+            'image',
+            'quantity',
+            'price'
         ]
 
 class ProductUpdateSerializer(ModelSerializer):
@@ -37,5 +41,7 @@ class ProductUpdateSerializer(ModelSerializer):
         model = Product
         fields = [
             'title',
-            'description'
+            'description',
+            'quantity',
+            'price'
         ]

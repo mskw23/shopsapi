@@ -35,20 +35,20 @@ IsAuthenticatedOrReadOnly,
 from shops.permissions import isOwnerOrReadOnly
 from shops.pagination import ShopLimitOffsetPagination, ShopPageNumberPagination
 
-from comments.models import Comment
+from products.models import Product
 from .serializers import ProductSerializer, ProductCreateSerializer, ProductUpdateSerializer
 # Create your views here.
 
 
 class ProductListAPIView(ListAPIView):
-    queryset = Comment.objects.all()
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
     pagination_class = ShopPageNumberPagination
 
 
 class ProductUpdateAPIView(RetrieveUpdateAPIView):
-    queryset = Comment.objects.all()
+    queryset = Product.objects.all()
     serializer_class = ProductUpdateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, isOwnerOrReadOnly]
 
@@ -57,13 +57,13 @@ class ProductUpdateAPIView(RetrieveUpdateAPIView):
 
 
 class ProductDestroyAPIView(DestroyAPIView):
-    queryset = Comment.objects.all()
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated, isOwnerOrReadOnly]
 
 
 class ProductCreateAPIView(CreateAPIView):
-    queryset = Comment.objects.all()
+    queryset = Product.objects.all()
     permission_classes = [IsAuthenticated]
     serializer_class = ProductCreateSerializer
 
