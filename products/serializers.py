@@ -11,7 +11,8 @@ class ProductSerializer(ModelSerializer):
             'id',
             'title',
             'description',
-            'shop'
+            'shop',
+            'image'
         ]
 
     def get_image(self, obj):

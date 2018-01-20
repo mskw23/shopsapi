@@ -20,7 +20,8 @@ class ShopListSerializer(ModelSerializer):
         fields = [
             'title',
             'image',
-            'url'
+            'url',
+            'slug'
         ]
 
     def get_image(self, obj):
