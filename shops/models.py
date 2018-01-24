@@ -21,9 +21,9 @@ def upload_location(instance, filename):
 # Create your models here.
 class Shop(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
-    title = models.CharField(max_length=20, blank=False)
+    title = models.CharField(max_length=15, blank=False)
     slug = models.SlugField(unique=True)
-    description = models.CharField(max_length=100, blank=False)
+    description = models.CharField(max_length=1000, blank=False)
     image = models.ImageField(upload_to=upload_location,
                               null=True,
                               blank=True)

@@ -37,6 +37,7 @@ from shops.pagination import ShopLimitOffsetPagination, ShopPageNumberPagination
 
 from comments.models import Comment
 from .serializers import CommentSerializer, CommentCreateSerializer, CommentUpdateSerializer
+from rest_framework.response import Response;
 # Create your views here.
 
 
